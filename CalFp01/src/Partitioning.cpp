@@ -14,7 +14,8 @@ int s_recursive(int n, int k) {
 }
 
 int s_dynamic(int n, int k) {
-	//vamos guardar as linhas (n-1) porque queremos guardar o valor de k
+	//vamos guardar as linhas (n-1) porque queremos guardar o valor de j
+	//(sera necessario para os calculos)
 	vector<int> vec(k, 1); //encher com 1's pois o caso base é 1
 
 	//teremos que repetir n-k pois serao o numero de linhas
