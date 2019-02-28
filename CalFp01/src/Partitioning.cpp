@@ -17,7 +17,8 @@ int s_dynamic(int n, int k) {
 	//vamos guardar as linhas (n-1) porque queremos guardar o valor de k
 	vector<int> vec(k, 1); //encher com 1's pois o caso base é 1
 
-	//teremos que repetir n-k vezes pois serão as diagonais necessarias efetuar o calculo
+	//teremos que repetir n-k pois serao o numero de linhas
+	//necessario calcular até chegar ao valor desejado
 	//reparar no esquema apresentado nos slides da teorica
 	for (int i = 1; i <= (n - k); i++) {
 
