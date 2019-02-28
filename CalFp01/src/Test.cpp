@@ -35,13 +35,13 @@ void calcChangeTest() {
 	 ASSERT_EQUAL("4;4;",calcChange(8, numCoins3, coinValues3));
 }
 
-void calcSumArrayTest() {/*
+void calcSumArrayTest() {
  int sequence[5] = {4,7,2,8,1};
  int sequence2[9] = {6,1,10,3,2,6,7,2,4};
 
  ASSERT_EQUAL("1,4;9,1;11,2;18,1;22,0;",calcSum(sequence, 5));
  ASSERT_EQUAL("1,1;5,3;11,3;16,1;20,3;24,3;31,1;35,1;41,0;",calcSum(sequence2, 9));
- */
+
 }
 
 void partitioningTest() {/*

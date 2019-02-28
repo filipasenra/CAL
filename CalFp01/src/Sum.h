@@ -20,5 +20,6 @@
  * Exemplo: 1,4;9,1;11,2;18,1;22,0;
  */
 string calcSum(int* sequence, int size);
+tuple<int, int> minSoma(int* sequence, int size, int M);
 
 #endif /* SUM_H_ */
