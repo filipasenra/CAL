@@ -8,8 +8,8 @@ int factorialRecurs(int n)
 {
 	int a = 0;
 
-	if (n <= 2)
-		a = 2;
+	if (n <= 1)
+		a = 1;
 	else
 	{
 		a = n*factorialRecurs(n-1);
