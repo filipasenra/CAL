@@ -81,7 +81,8 @@ bool Sudoku::isComplete() {
  *@brief the cell with the fewest options
  *@brief in case the case of multiple options, returns the first one found
  *
- *@return returns the cell with the fewest options
+ *@return returns the cell with the fewest options and
+ *@return the options for that cell
  */
 tuple<int, int, vector<int>> Sudoku::nextCel() {
 
