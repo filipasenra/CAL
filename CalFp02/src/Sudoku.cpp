@@ -163,7 +163,7 @@ bool Sudoku::solveRec(int x, int y, vector<int> vec) {
 	//Iterar de 1 a 9 (para os valores da celula)
 	for (unsigned int i = 0; i < vec.size(); i++) {
 
-			fillCel(x, y, i);
+		fillCel(x, y, i);
 
 		tuple<int, int, vector<int>> cel = nextCel();
 
