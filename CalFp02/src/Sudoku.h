@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <vector>
 using namespace std;
 
 #define IllegalArgumentException -1
@@ -73,9 +74,9 @@ public:
 	 */
 	void print();
 
-	bool solveRec(int i, int j);
+	bool solveRec(int x, int y, vector<int> vec);
 
-	tuple<int, int> nextCel();
+	tuple<int, int, vector<int>> nextCel();
 	void fillCel(int x, int y, int value);
 	void emptyCel(int x, int y, int value);
 };

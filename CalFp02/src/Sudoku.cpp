@@ -5,6 +5,7 @@
 
 #include "Sudoku.h"
 #include <tuple>
+#include <vector>
 
 /** Inicia um Sudoku vazio.
  */
@@ -82,11 +83,12 @@ bool Sudoku::isComplete() {
  *
  *@return returns the cell with the fewest options
  */
-tuple<int, int> Sudoku::nextCel() {
+tuple<int, int, vector<int>> Sudoku::nextCel() {
 
 	//let's save the best cell (the cell with the fewest options)
 	int best_x = 0;
 	int best_y = 0;
+	vector<int> vec;
 
 	//saves the number of options for the cell above.
 	int best_n = 9;
@@ -96,12 +98,16 @@ tuple<int, int> Sudoku::nextCel() {
 
 			if (numbers[i][j] == 0) {
 				int n = 9;
+				vector<int> vec_tmp;
 
 				//checks what numbers are in the column, line or block
 				for (int a = 1; a <= 9; a++)
 					if (columnHasNumber[j][a] || lineHasNumber[i][a]
 							|| block3x3HasNumber[i / 3][j / 3][a])
-						n--;
+						{
+							n--;
+							vec_tmp.push_back(a);
+						}
 
 				//saves the cell with fewest options
 				if (n < best_n) {
@@ -109,10 +115,13 @@ tuple<int, int> Sudoku::nextCel() {
 					best_x = i;
 					best_y = j;
 				}
+
+				if (n == 1)
+					break;
 			}
 		}
 
-	return make_tuple(best_x, best_y);
+	return make_tuple(best_x, best_y, vec);
 }
 
 /**
@@ -145,24 +154,19 @@ void Sudoku::emptyCel(int x, int y, int value) {
  *@brief Solves the soduku (recursively)
  *@brief Auxiliary function do Solve
  */
-bool Sudoku::solveRec(int x, int y) {
+bool Sudoku::solveRec(int x, int y, vector<int> vec) {
 	//Caso base
 	if (isComplete())
 		return true;
 
 	//Iterar de 1 a 9 (para os valores da celula)
-	for (unsigned int i = 1; i <= 9; i++) {
+	for (unsigned int i = 0; i < vec.size(); i++) {
 
-		//se o numero não estiver nem na coluna, nem no bloco, nem na linha
-		if (!lineHasNumber[x][i] && !columnHasNumber[y][i]
-				&& !block3x3HasNumber[x / 3][y / 3][i])
 			fillCel(x, y, i);
-		else
-			continue;
 
-		tuple<int, int> cel = nextCel();
+		tuple<int, int, vector<int>> cel = nextCel();
 
-		if (solveRec(get<0>(cel), get<1>(cel)))
+		if (solveRec(get<0>(cel), get<1>(cel), get<2>(cel)))
 			return true;
 		else
 			emptyCel(x, y, i);
@@ -177,9 +181,9 @@ bool Sudoku::solveRec(int x, int y) {
  */
 bool Sudoku::solve() {
 
-	tuple<int, int> cel = nextCel();
+	tuple<int, int, vector<int>> cel = nextCel();
 
-	return solveRec(get<0>(cel), get<1>(cel));
+	return solveRec(get<0>(cel), get<1>(cel), get<2>(cel));
 }
 
 /**

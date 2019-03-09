@@ -1,12 +1,36 @@
 <testsuites>
 	<testsuite name="AllTests" tests="9">
 		<testcase classname="AllTests" name="testSudokuAlreadySolved"/>
-		<testcase classname="AllTests" name="testSudokuNoneBackStepsRequired"/>
-		<testcase classname="AllTests" name="testSudokuSomeBackStepsRequired"/>
-		<testcase classname="AllTests" name="testSudokuManyBackStepsRequired"/>
-		<testcase classname="AllTests" name="testSudokuWithMinimalClues"/>
-		<testcase classname="AllTests" name="testSudokuWithMultipleSolutions"/>
-		<testcase classname="AllTests" name="testSudokuEmpty"/>
+		<testcase classname="AllTests" name="testSudokuNoneBackStepsRequired">
+			<failure message="..\src\Test.cpp:68 testSudokuNoneBackStepsRequired: s.solve() == true expected:	0	but was:	1	">
+testSudokuNoneBackStepsRequired: s.solve() == true expected:	0	but was:	1	
+			</failure>
+		</testcase>
+		<testcase classname="AllTests" name="testSudokuSomeBackStepsRequired">
+			<failure message="..\src\Test.cpp:105 testSudokuSomeBackStepsRequired: s.solve() == true expected:	0	but was:	1	">
+testSudokuSomeBackStepsRequired: s.solve() == true expected:	0	but was:	1	
+			</failure>
+		</testcase>
+		<testcase classname="AllTests" name="testSudokuManyBackStepsRequired">
+			<failure message="..\src\Test.cpp:143 testSudokuManyBackStepsRequired: s.solve() == true expected:	0	but was:	1	">
+testSudokuManyBackStepsRequired: s.solve() == true expected:	0	but was:	1	
+			</failure>
+		</testcase>
+		<testcase classname="AllTests" name="testSudokuWithMinimalClues">
+			<failure message="..\src\Test.cpp:181 testSudokuWithMinimalClues: s.solve() == true expected:	0	but was:	1	">
+testSudokuWithMinimalClues: s.solve() == true expected:	0	but was:	1	
+			</failure>
+		</testcase>
+		<testcase classname="AllTests" name="testSudokuWithMultipleSolutions">
+			<failure message="..\src\Test.cpp:207 testSudokuWithMultipleSolutions: s.solve() &amp;&amp; s.isComplete() == true expected:	0	but was:	1	">
+testSudokuWithMultipleSolutions: s.solve() &amp;&amp; s.isComplete() == true expected:	0	but was:	1	
+			</failure>
+		</testcase>
+		<testcase classname="AllTests" name="testSudokuEmpty">
+			<failure message="..\src\Test.cpp:229 testSudokuEmpty: s.solve() == true expected:	0	but was:	1	">
+testSudokuEmpty: s.solve() == true expected:	0	but was:	1	
+			</failure>
+		</testcase>
 		<testcase classname="AllTests" name="testSudokuImpossible"/>
 		<testcase classname="AllTests" name="testLabirinth"/>
 	</testsuite>
