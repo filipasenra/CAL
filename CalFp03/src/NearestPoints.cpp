@@ -136,13 +136,17 @@ static Result np_DC(vector<Point> &vp, int left, int right, int numThreads) {
 	//the middle of the strip in x coordenates
 	double middleX = (vp.at(mid).x + vp.at(mid + 1).x) / 2;
 
-	//Porque que aqui e range e nao mid?
-	int stripLeft = range /2;
-	int stripRight = range /2 + 1;
+	//Indice por onde começa a faixa do lado esquerdo e direito, respetivamente
+	int stripLeft = mid /2;
+	int stripRight = mid /2 + 1;
 
-	while (stripLeft > left && vp[stripLeft - 1].x > middleX - resBest.dmin)
+	//se a distancia X entre o ponto e o meio é
+	//menor que a melhor distancia encontrada ate agora
+	while (stripLeft > left && (middleX - vp[stripLeft - 1].x) <= resBest.dmin)
 		stripLeft--;
-	while (stripRight < right && vp[stripRight + 1].x < middleX + resBest.dmin)
+
+
+	while (stripRight < right && (vp[stripLeft - 1].x - middleX) <= resBest.dmin)
 		stripRight++;
 
 	// Order points in strip area by Y coordinate
