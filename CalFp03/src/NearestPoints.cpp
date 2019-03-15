@@ -95,10 +95,19 @@ static void npByY(vector<Point> &vp, int left, int right, Result &res) {
  * Recursive divide and conquer algorithm.
  * Finds the nearest points in "vp" between indices left and right (inclusive),
  * using at most numThreads.
+ *
+ * @param vector com os pontos,
+ * @param valor do indice inicial do vector
+ * @param valor do indice final do vector
  */
 static Result np_DC(vector<Point> &vp, int left, int right, int numThreads) {
 
-	int range = abs(right-left);
+	//distancia entre o ponto inicial e final (nº de pontos = range + 1)
+	int range = abs(right - left);
+
+	//indice intermédio
+	int mid = (right + left) / 2;
+
 	// Base case of two points
 	if (range == 1)
 		return Result(vp.at(left).distance(vp.at(right)), vp.at(left),
@@ -111,8 +120,8 @@ static Result np_DC(vector<Point> &vp, int left, int right, int numThreads) {
 	// Divide in halves (left and right) and solve them recursively,
 	// possibly in parallel (in case numThreads > 1)
 
-	Result resleft = np_DC(vp, left, range / 2, numThreads);
-	Result resright = np_DC(vp, range / 2 + 1, right, numThreads);
+	Result resleft = np_DC(vp, left, mid, numThreads);
+	Result resright = np_DC(vp, mid + 1, right, numThreads);
 
 	// Select the best solution from left and right
 	Result resBest;
@@ -123,34 +132,24 @@ static Result np_DC(vector<Point> &vp, int left, int right, int numThreads) {
 		resBest = resright;
 
 	// Determine the strip area around middle point
-	double dist = resBest.dmin;
-	//getting the coordenates of the middle
-	double middle = (vp.at(range / 2).distance(
-			vp.at(range / 2 + 1))) / 2.0;
 
-	int stripLeft;
-	int stripRight;
-	//Pontos à esquerda
-	for (int i = range / 2; i > 0; i--) {
-		if (abs(vp.at(i).x - middle) <= dist)
-			stripLeft = i;
-		else
-			break;
-	}
+	//the middle of the strip in x coordenates
+	double middleX = (vp.at(mid).x + vp.at(mid + 1).x) / 2;
 
-	//Pontos à direita
-	for (int i = range / 2 + 1; i < vp.size(); i++) {
-		if (abs(vp.at(i).x - middle) <= dist)
-			stripRight = i;
-		else
-			break;
-	}
+	//Porque que aqui e range e nao mid?
+	int stripLeft = range /2;
+	int stripRight = range /2 + 1;
+
+	while (stripLeft > left && vp[stripLeft - 1].x > middleX - resBest.dmin)
+		stripLeft--;
+	while (stripRight < right && vp[stripRight + 1].x < middleX + resBest.dmin)
+		stripRight++;
 
 	// Order points in strip area by Y coordinate
 	sortByY(vp, stripLeft, stripRight);
 
 	// Calculate nearest points in strip area (using npByY function)
-	//npByY(vp, stripLeft, stripRight, resBest);
+	npByY(vp, stripLeft, stripRight, resBest);
 
 	// Reorder points in strip area back by X coordinate
 	sortByX(vp, stripLeft, stripRight);
