@@ -120,9 +120,22 @@ static Result np_DC(vector<Point> &vp, int left, int right, int numThreads) {
 	// Divide in halves (left and right) and solve them recursively,
 	// possibly in parallel (in case numThreads > 1)
 
-	Result resleft = np_DC(vp, left, mid, numThreads);
-	Result resright = np_DC(vp, mid + 1, right, numThreads);
+	Result resleft;
+	Result resright;
 
+	//Threads -> devides the work (several functions running at the same time)
+	/*if (numThreads > 1) {
+		thread t([&](){resleft = np_DC(vp, left, mid, numThreads/2);});
+
+		resright = np_DC(vp, mid + 1, right, numThreads / 2);
+
+		//waits for thread t to finish
+		t.join();
+
+	} else {*/
+		resleft = np_DC(vp, left, mid, numThreads);
+		resright = np_DC(vp, mid + 1, right, numThreads);
+	//}
 	// Select the best solution from left and right
 	Result resBest;
 
@@ -137,14 +150,13 @@ static Result np_DC(vector<Point> &vp, int left, int right, int numThreads) {
 	double middleX = (vp.at(mid).x + vp.at(mid + 1).x) / 2;
 
 	//Indice por onde começa a faixa do lado esquerdo e direito, respetivamente
-	int stripLeft = mid /2;
-	int stripRight = mid /2 + 1;
+	int stripLeft = mid / 2;
+	int stripRight = mid / 2 + 1;
 
 	//se a distancia X entre o ponto e o meio é
 	//menor que a melhor distancia encontrada ate agora
 	while (stripLeft > left && (middleX - vp[stripLeft - 1].x) <= resBest.dmin)
 		stripLeft--;
-
 
 	while (stripRight < right && (vp[stripLeft - 1].x - middleX) <= resBest.dmin)
 		stripRight++;
