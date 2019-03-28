@@ -1,0 +1,15 @@
+<testsuites>
+	<testsuite name="AllTests" tests="11">
+		<testcase classname="AllTests" name="test_addVertex"/>
+		<testcase classname="AllTests" name="test_addEdge"/>
+		<testcase classname="AllTests" name="test_removeEdge"/>
+		<testcase classname="AllTests" name="test_removeVertex"/>
+		<testcase classname="AllTests" name="test_dfs"/>
+		<testcase classname="AllTests" name="test_removeVertex_Again"/>
+		<testcase classname="AllTests" name="test_removeEdge_Again"/>
+		<testcase classname="AllTests" name="test_bfs"/>
+		<testcase classname="AllTests" name="test_topsort"/>
+		<testcase classname="AllTests" name="test_maxNewChildren"/>
+		<testcase classname="AllTests" name="test_isDAG"/>
+	</testsuite>
+</testsuites>
