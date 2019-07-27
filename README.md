@@ -1,6 +1,8 @@
 # CAL
 Exercises and Exams solutions for the CAL curricular unit.
 
+**Final Grade**: 17
+
 ## Project Infos
 * Date: 2nd Year, 2st Semester, 2018/2019
 * Course: Concepção e Análise de Algoritmos (CAL) | Conception and Analysis of Algorithms
